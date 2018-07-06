@@ -4,6 +4,60 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
+    books: [
+      {
+        title: 'To Kill a Mockingbird',
+        author: 'Harper Lee',
+        img: url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api"),
+        shelf: 'Currently Reading',
+      },
+
+      {
+        title: "Ender's Game",
+        author: 'Orson Scott Card',
+        img: '',
+        shelf: 'Currently Reading'
+      },
+
+      {
+        title: '1776',
+        author: 'David McCullough',
+        img: '',
+        shelf: 'Want to Read'
+      },
+
+      {
+        title: "Harry Potter and the Philospher's Stone",
+        author: 'J.K. Rowling',
+        img: '',
+        shelf: 'Want to Read'
+      },
+
+
+      {
+        title: "The Hobbit",
+        author: 'J.R.R. Tolkein',
+        img: '',
+        shelf: 'Read'
+      },
+
+
+      {
+        title: "Oh, the Places You'll Go!",
+        author: 'Seuss',
+        img: '',
+        shelf: 'Read'
+      },
+
+
+      {
+        title: "The Adventures of Tom Sawyer",
+        author: 'Mark Twain',
+        img: '',
+        shelf: 'Read'
+      },
+
+    ]
     /**
      * TODO: Instead of using this state variable to keep track of which page
      * we're on, use the URL in the browser's address bar. This will ensure that
@@ -16,6 +70,16 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+
+
+
+
+
+
+
+
+
+
         {this.state.showSearchPage ? (
           <div className="search-books">
             <div className="search-books-bar">
