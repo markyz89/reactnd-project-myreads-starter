@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import ListControl from './ListControl'
 
 function WantToRead (props) {
 	return (
@@ -12,13 +13,7 @@ function WantToRead (props) {
 									<div className="book-top">
 										<div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${book.img})` }}></div>
 										<div className="book-shelf-changer">
-											<select>
-				                                <option value="move" disabled>Move to...</option>
-				                                <option value="currentlyReading">Currently Reading</option>
-				                                <option value="wantToRead">Want to Read</option>
-				                                <option value="read">Read</option>
-				                                <option value="none">None</option>
-				                            </select>
+											<ListControl />
 										</div> 
 									</div>
 								</div>
