@@ -1,5 +1,6 @@
 import React from 'react'
 import MainPage from './Components/MainPage'
+import BookShelf from './Components/BookShelf'
 
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
@@ -20,6 +21,7 @@ class BooksApp extends React.Component {
   }
 
 
+
 }
 
 
@@ -27,8 +29,14 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app"> 
-         <MainPage />
-
+         <div className="list-books">
+            <div className="list-books-title">
+              <h1>MyReads</h1>
+            </div>
+              <BookShelf whichShelf ="Currently Reading" onChange={this.changeShelf} />
+              <BookShelf whichShelf ="Want to Read" onChange={this.changeShelf} />
+              <BookShelf whichShelf ="Read" onChange={this.changeShelf}/>
+          </div>
       </div>
       );
     }

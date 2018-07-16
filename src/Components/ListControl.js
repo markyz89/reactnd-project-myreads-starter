@@ -1,29 +1,35 @@
 import React, {Component} from 'react'
 
-
 class ListControl extends React.Component {
-	constructor (props) {
+	constructor(props) {
 		super(props);
 
-// this.moveToCurrentlyReading	= this.moveToCurrentlyReading.bind(this)
-
+		this.handleChange = this.handleChange.bind(this);
 	}
 
-	// moveToCurrentlyReading() {
- //  		console.log('move it');
-	// }
+	handleChange(e) {
+		const newBookRow = e.target.value;
+		const bookKey = this.props.bookKey;
+		
+		// console.log(this.props.shelf)
+		this.props.onChangeShelf(newBookRow, bookKey);
+		
+		// console.log(e.target);
+	}
 
 	render() {
-	return (
-		<select>
-            <option value="move" disabled>Move to...</option>
-            <option value="currentlyReading">Currently Reading</option>
-            <option value="wantToRead">Want to Read</option>
-            <option value="read">Read</option>
-            <option value="none">None</option>
-        </select>
-		)
-	}
+		return (
+			<select onChange={this.handleChange}>
+	            <option value="move" disabled>Move to...</option>
+	            <option value="Currently Reading">Currently Reading</option>
+	            <option value="Want to Read">Want to Read</option>
+	            <option value="Read">Read</option>
+	            <option value="none">None</option>
+        	</select>
+			)
+		}
+
 }
+	
 
 export default ListControl
