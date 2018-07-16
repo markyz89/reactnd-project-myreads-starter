@@ -1,6 +1,19 @@
 import React, {Component} from 'react'
 
-function ListControl (props) {
+
+class ListControl extends React.Component {
+	constructor (props) {
+		super(props);
+
+// this.moveToCurrentlyReading	= this.moveToCurrentlyReading.bind(this)
+
+	}
+
+	// moveToCurrentlyReading() {
+ //  		console.log('move it');
+	// }
+
+	render() {
 	return (
 		<select>
             <option value="move" disabled>Move to...</option>
@@ -10,6 +23,7 @@ function ListControl (props) {
             <option value="none">None</option>
         </select>
 		)
+	}
 }
 
 export default ListControl

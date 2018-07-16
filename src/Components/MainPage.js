@@ -1,7 +1,5 @@
 import React from 'react'
-import CurrentlyReading from './CurrentlyReading'
-import WantToRead from './WantToRead'
-import Read from './Read'
+import BookShelf from './BookShelf'
 
 
 
@@ -33,7 +31,7 @@ class MainPage extends React.Component {
 	      },
 
 	      {
-	        title: "Harry Potter and the Philospher's Stone",
+	        title: "Harry Potter and the Philosopher's Stone",
 	        author: 'J.K. Rowling',
 	        img: 'http://books.google.com/books/content?id=wrOQLV6xB-wC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72G3gA5A-Ka8XjOZGDFLAoUeMQBqZ9y-LCspZ2dzJTugcOcJ4C7FP0tDA8s1h9f480ISXuvYhA_ZpdvRArUL-mZyD4WW7CHyEqHYq9D3kGnrZCNiqxSRhry8TiFDCMWP61ujflB&source=gbs_api',
 	        shelf: 'Want to Read'
@@ -65,7 +63,9 @@ class MainPage extends React.Component {
 
 	   	],
 	}
+
 }
+
 
 
 
@@ -75,14 +75,10 @@ class MainPage extends React.Component {
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
-            <CurrentlyReading
-            list={this.state.books.filter((book) => book.shelf === 'Currently Reading')} />
-            <WantToRead list={this.state.books.filter((book) => book.shelf === 'Want to Read')} />
-            <Read list={this.state.books.filter((book) => book.shelf === 'Read')} />
-
-        </div>
-
-
+	            <BookShelf list={this.state.books.filter((book) => book.shelf === 'Currently Reading')} whichShelf ="Currently Reading" />
+	            <BookShelf list={this.state.books.filter((book) => book.shelf === 'Want to Read')} whichShelf ="Want to Read"/>
+	            <BookShelf list={this.state.books.filter((book) => book.shelf === 'Read')} whichShelf ="Read"/>
+        	</div>
 		);
 	}
 }

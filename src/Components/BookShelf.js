@@ -1,21 +1,35 @@
 import React, {Component} from 'react'
 import ListControl from './ListControl'
 
-function Read (props) {
+
+class BookShelf extends React.Component {
+	constructor(props)	{
+		super(props);
+}
+
+// changeShelf() {
+// 	console.log('change the shelf')
+// } Move to new BookShelf component which is direct parent of list control
+
+render () {
+
 	return (
 		 <div className="bookshelf">
-	          <h2 className="bookshelf-title">Read</h2>
-		           <div className="bookshelf-books">
+	          <h2 className="bookshelf-title">{this.props.whichShelf}</h2>
+		          <div className="bookshelf-books">
 		            <ol className="books-grid">
-						{props.list.map((book) => (
+						{this.props.list.map((book) => (
 							<li key={book.title}>
 								<div className="book">
 									<div className="book-top">
 										<div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${book.img})` }}></div>
+
+									
 										<div className="book-shelf-changer">
-											<ListControl />
+											<ListControl onChangeShelf = {this.changeShelf} />
 										</div> 
-									</div>
+
+										</div>
 								</div>
 
 								<div className="book-title">{book.title}</div>
@@ -23,19 +37,12 @@ function Read (props) {
 									
 							</li>
 							))}
-		              </ol>
-					</div>
+		            </ol>
+	          </div>
 		 </div>
-
-
-
-
 		)
-
-
-
-
-
+	}
 }
 
-export default Read
+export default BookShelf
+
