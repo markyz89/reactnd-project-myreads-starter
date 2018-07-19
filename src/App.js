@@ -1,8 +1,10 @@
 import React from 'react'
-import MainPage from './Components/MainPage'
+import { Route } from 'react-router-dom'
 import BookShelf from './Components/BookShelf'
+import Search from  './Components/Search'
+import SearchButton from  './Components/SearchButton'
 
-// import * as BooksAPI from './BooksAPI'
+
 import './App.css'
 
 
@@ -17,30 +19,44 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false
+
   }
 
 
 
 }
 
-
-
   render() {
     return (
       <div className="app"> 
-         <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-              <BookShelf whichShelf ="Currently Reading" onChange={this.changeShelf} />
-              <BookShelf whichShelf ="Want to Read" onChange={this.changeShelf} />
-              <BookShelf whichShelf ="Read" onChange={this.changeShelf}/>
-          </div>
-      </div>
-      );
+        <Route path="/search" render={() => (
+          <Search/>
+          )}
+        />
+              <Route path="/" exact render={() => (
+                <div className="list-books">
+                  <div className="list-books-title">
+                    <h1>MyReads</h1>
+                  </div>
+                  
+                    <BookShelf whichShelf ="currentlyReading" onChange={this.changeShelf} />
+                    <BookShelf whichShelf ="wantToRead" onChange={this.changeShelf} />
+                    <BookShelf whichShelf ="read" onChange={this.changeShelf}/>
+                           
+                <SearchButton buttonState={this.displaySearchPage} />
+              
+              </div>
+             )} />
+
+       
+       </div>
+            )
+      }
+
+
+         
+    
+      
     }
 
-
-  }
   export default BooksApp
