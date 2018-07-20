@@ -2,7 +2,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from '../BooksAPI'
-// import SearchResults from './SearchResults'
+import SearchResults from './SearchResults'
 
 class Search extends React.Component {
   constructor(props) {
@@ -23,8 +23,7 @@ class Search extends React.Component {
       this.setState({
         searchResults: results
       })
-      console.log('results in state=',this.state.searchResults)
-      console.log('results param =',results)
+      console.log('results =',results)
       console.log('query =',this.state.query)
     } )
   }
@@ -59,14 +58,14 @@ class Search extends React.Component {
               <div className="search-books-results">
               <ol className="books-grid">
                {this.state.searchResults != null && (
-                <div>
-                {this.state.searchResults.map((book) => (
-                  <h1>{book.title}</h1>
+                <SearchResults searchResults={this.state.searchResults}/> 
+              
+              
+                
+                  )}
                 
 
-                  ))}
-                </div>
-                  )}
+                  
 
 
               </ol>

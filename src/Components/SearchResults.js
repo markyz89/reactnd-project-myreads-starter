@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Book from './Book'
 
 function SearchResults(props) {
 	return (
@@ -7,7 +7,7 @@ function SearchResults(props) {
 		<div className="search-books-results">
               <ol className="books-grid">
               	{props.searchResults.map((book) => (
-              		<h1>{book.title}</h1>
+              		<Book book={book} />
 
 
               		))}
@@ -21,6 +21,5 @@ function SearchResults(props) {
 }
 
 export default SearchResults
-
 
 

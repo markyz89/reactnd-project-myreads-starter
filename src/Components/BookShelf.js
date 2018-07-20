@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import ListControl from './ListControl'
+// import ListControl from './ListControl'
+import Book from './Book'
 import * as BooksAPI from '../BooksAPI'
 
 class BookShelf extends React.Component {
@@ -10,7 +11,7 @@ class BookShelf extends React.Component {
 			books: [],
 	}
 
-// this.changeShelf = this.changeShelf.bind(this);
+this.changeShelf = this.changeShelf.bind(this);
 	
 }
 
@@ -19,17 +20,41 @@ componentDidMount() {
         this.setState({ 
         	books: books,
         			 })
-         console.log (books)
+         // console.log ("what is at this point?",books)
       })
 
     }
 
 
-// changeShelf(newShelf, key, img, author) {
-// 	// 	 console.log('bookKey = ', key)
-//  // console.log('newBookRow =', newShelf);
+changeShelf(newShelf, book) {
+	// console.log('book 2nd time= ', book)
+ // 	console.log('newBookRow 2nd time =', newShelf);
+ 	let update = this.state.books
 
-//  	}
+ 	book.shelf = newShelf
+
+ 	console.log("updated object", book)
+
+ 	let oldCollection = update.filter(b => b.id != book.id)
+ 	console.log("old collection = ", oldCollection)
+
+ 	let newCollection = oldCollection.concat([book])
+ 	console.log("new collection = ", newCollection)
+
+
+ 	BooksAPI.update(book, newShelf).then((data) => {
+     
+    })
+
+ 	this.setState({
+ 		books: newCollection
+ 	})
+
+ 	
+ }
+
+
+
 	
 
 
@@ -49,25 +74,12 @@ let list = this.state.books.filter(book => book.shelf === this.props.whichShelf)
 	          </h2>
 		          <div className="bookshelf-books">
 		            <ol className="books-grid">
-		     			
-						{list.map((book) => (
-							<li key={book.title}>
-								<div className="book">
-									<div className="book-top">
-										<div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>									
-										<div className="book-shelf-changer">
-											{/*<ListControl onChangeShelf = {this.changeShelf} shelf={book.shelf} bookKey = {book.title} bookImg={book.img} bookAuthor={book.author}/> */}
-										</div> 
-
-										</div>
-								</div>
-
-								<div className="book-title">{book.title}</div>
-                          		<div className="book-authors">{book.author}</div>
-									
-							</li>
-							))}
-		            	
+		            	{list != null && 				     				
+				     			list.map((book) => (
+				     				<Book book={book} onChangeShelf={this.changeShelf}/>
+				            	))
+				           	
+		            	}
 		            </ol>
 	          </div>
 		 </div>
@@ -76,4 +88,3 @@ let list = this.state.books.filter(book => book.shelf === this.props.whichShelf)
 }
 
 export default BookShelf
-

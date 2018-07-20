@@ -8,24 +8,25 @@ class ListControl extends React.Component {
 	}
 
 	handleChange(e) {
-		const newBookRow = e.target.value;
-		const bookKey = this.props.bookKey;
-		const bookImg = this.props.bookImg;
-		const bookAuthor = this.props.bookAuthor;
+		// e.preventDefault();
+		let newBookRow = e.target.value;
+		let book = this.props.book;
 		
-		// console.log(this.props.shelf)
-		this.props.onChangeShelf(newBookRow, bookKey, bookImg, bookAuthor);
+		console.log("the shelf I clicked on was ", newBookRow)
+		console.log("the book object is..",book)
+		if (this.props.onChangeShelf) {
+			this.props.onChangeShelf(newBookRow, book);
+		}
 		
-		// console.log(e.target);
 	}
 
 	render() {
 		return (
 			<select onChange={this.handleChange}>
-	            <option value="move" disabled>Move to...</option>
-	            <option value="Currently Reading">Currently Reading</option>
-	            <option value="Want to Read">Want to Read</option>
-	            <option value="Read">Read</option>
+	            <option value="move">Move to...</option>
+	            <option value="currentlyReading">Currently Reading</option>
+	            <option value="wantToRead">Want to Read</option>
+	            <option value="read">Read</option>
 	            <option value="none">None</option>
         	</select>
 			)
