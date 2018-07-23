@@ -15,19 +15,29 @@ class Search extends React.Component {
     
   }
 
-  updateQuery = (query) => {
-    this.setState({query: query.trim() });
-    console.log(query);
-
-     BooksAPI.search(this.state.query).then((results) => {
+    updateQuery = (query) => {
+    this.setState({query});
+    // console.log(query);
+    if (query) {
+     BooksAPI.search(query).then((searchResults) => {
+      if(searchResults.error) {
+        this.setState({
+        searchResults: []
+      });
+      } else {
+        this.setState({
+        searchResults
+      });
+      }
+      
+    }) } else {
       this.setState({
-        searchResults: results
-      })
-      console.log('results =',results)
-      console.log('query =',this.state.query)
-    } )
-  }
-
+        searchResults: []
+      });
+    }
+      // console.log('results =',results)
+      // console.log('query =',this.state.query)
+    }
   
 
   
@@ -55,25 +65,12 @@ class Search extends React.Component {
 
               </div>
             </div>
-              <div className="search-books-results">
-              <ol className="books-grid">
                {this.state.searchResults != null && (
                 <SearchResults searchResults={this.state.searchResults}/> 
               
               
                 
-                  )}
-                
-
-                  
-
-
-              </ol>
-            </div>
-
-
-           
-
+                  )}        
          
         </div>
     )

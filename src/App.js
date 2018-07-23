@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import BookShelf from './Components/BookShelf'
 import Search from  './Components/Search'
 import SearchButton from  './Components/SearchButton'
+import * as BooksAPI from './BooksAPI'
 
 
 import './App.css'
@@ -12,24 +13,58 @@ class BooksApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-
-  }
-
-
-
+      books: [],
+      shelf: '',
+      movedBook: ''
+    }
+    this.changeShelf = this.changeShelf.bind(this);
 }
 
+componentDidMount() {
+      BooksAPI.getAll().then((books) => {
+        this.setState({ 
+          books: books,
+          shelf: '',
+          movedBook: ''
+               })
+         // console.log ("what is it at this point?",books)
+      })
+
+    }
+
+changeShelf(newShelf, book) {
+  console.log('book 2nd time= ', book)
+   console.log('newBookRow 2nd time =', newShelf);
+  let update = this.state.books
+  book.shelf = newShelf
+
+  let oldCollection = update.filter(b => b.id != book.id)
+  // console.log("old collection = ", oldCollection)
+
+  let newCollection = oldCollection.concat([book])
+  // console.log("new collection = ", newCollection)
+  
+
+  BooksAPI.update(book, newShelf).then((book) => {
+      // this.setState(state => ({
+      //   books: newCollection
+      }
+    )
+
+    this.setState({
+      shelf: newShelf,
+      movedBook: book
+    })
+
+  
+ }
+
   render() {
+
+
     return (
       <div className="app"> 
-        <Route path="/search" render={() => (
+        <Route path="/search" render={() => ( 
           <Search/>
           )}
         />
@@ -39,9 +74,10 @@ class BooksApp extends React.Component {
                     <h1>MyReads</h1>
                   </div>
                   
-                    <BookShelf whichShelf ="currentlyReading" onChange={this.changeShelf} />
-                    <BookShelf whichShelf ="wantToRead" onChange={this.changeShelf} />
-                    <BookShelf whichShelf ="read" onChange={this.changeShelf}/>
+
+                    <BookShelf whichShelf ="currentlyReading" onChangeShelf={this.changeShelf} books={this.state.books}/>
+                    <BookShelf whichShelf ="wantToRead" onChangeShelf={this.changeShelf} books={this.state.books} />
+                    <BookShelf whichShelf ="read" onChangeShelf={this.changeShelf} books={this.state.books}/>
                            
                 <SearchButton buttonState={this.displaySearchPage} />
               

@@ -12,10 +12,10 @@ class ListControl extends React.Component {
 		let newBookRow = e.target.value;
 		let book = this.props.book;
 		
-		console.log("the shelf I clicked on was ", newBookRow)
-		console.log("the book object is..",book)
-		if (this.props.onChangeShelf) {
-			this.props.onChangeShelf(newBookRow, book);
+		// console.log("the shelf I clicked on was ", newBookRow)
+		// console.log("the book object is..",book)
+		if (this.props.moveItUp) {
+			this.props.moveItUp(newBookRow, book);
 		}
 		
 	}

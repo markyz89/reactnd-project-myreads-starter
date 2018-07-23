@@ -9,8 +9,8 @@ class Book extends React.Component {
 	// this.state = {
 	// 	shelf: ''		
 	// }
-	this.changeShelf = this.changeShelf.bind(this)
-	// this.carrierFunction = this.carrierFunction.bind(this)
+	// this.changeShelf = this.changeShelf.bind(this)
+	this.carrierFunction = this.carrierFunction.bind(this)
 
 }
 
@@ -24,24 +24,26 @@ class Book extends React.Component {
 
 
 
-changeShelf(newShelf, book) {
-	 console.log('book first time = ', book)
-	 console.log('newBookRow first time =', newShelf);
-	 if (this.props.onChangeShelf) {
-		this.props.onChangeShelf(newShelf, book);
+carrierFunction(newShelf, book) {
+	 // console.log('book first time = ', book)
+	 // console.log('newBookRow first time =', newShelf);
+	 if (this.props.moveItUpTwo ) {
+		this.props.moveItUpTwo(newShelf, book);
 	}
 }
 
 
 	render () {
-		const book = this.props.book
+		let book = this.props.book 
+		console.log("book =",book)
+		let coverImageStyle = { width: 128, height: 188, backgroundImage: book.imageLinks ? `url(${book.imageLinks.smallThumbnail})` : ''}  
 return (
-			<li key={book.title}>
+			<li key={book.id}>
 				<div className="book">
 					<div className="book-top">
-						<div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>									
+						 <div className="book-cover" style={coverImageStyle}></div>									
 						<div className="book-shelf-changer">
-							<ListControl onChangeShelf = {this.changeShelf} book={book}/>
+							<ListControl moveItUp = {this.carrierFunction} book={book}/>
 						</div> 
 
 					</div>
