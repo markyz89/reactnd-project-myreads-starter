@@ -6,24 +6,12 @@ class Book extends React.Component {
 	constructor(props) {
 	super(props);
 
-	// this.state = {
-	// 	shelf: ''		
-	// }
-	// this.changeShelf = this.changeShelf.bind(this)
+
 	this.carrierFunction = this.carrierFunction.bind(this)
 
 }
 
-	// componentDidMount() {
-	// 	const book = this.props.book
-	// 	this.setState({
-	// 		shelf: book.shelf
-	// 	})
-	// 	console.log(book.shelf, 'has books!')
-	// }
-
-
-
+// this function exists to pass data up to the parent component.
 carrierFunction(newShelf, book) {
 	 // console.log('book first time = ', book)
 	 // console.log('newBookRow first time =', newShelf);
@@ -35,15 +23,15 @@ carrierFunction(newShelf, book) {
 
 	render () {
 		let book = this.props.book 
-		console.log("book =",book)
+		// console.log("book =",book)
 		let coverImageStyle = { width: 128, height: 188, backgroundImage: book.imageLinks ? `url(${book.imageLinks.smallThumbnail})` : ''}  
 return (
-			<li key={book.id}>
+			<React.Fragment> 
 				<div className="book">
 					<div className="book-top">
 						 <div className="book-cover" style={coverImageStyle}></div>									
 						<div className="book-shelf-changer">
-							<ListControl moveItUp = {this.carrierFunction} book={book}/>
+							<ListControl moveItUp = {this.carrierFunction} book={book} whichShelf={this.props.whichShelf}/>
 						</div> 
 
 					</div>
@@ -51,19 +39,11 @@ return (
 
 				<div className="book-title">{book.title}</div>
           		<div className="book-authors">{book.author}</div>
-					
-			</li>
+			</React.Fragment> 
+
 			
 			)
 		}
 	}
 
 export default Book
-
-// What determines what shelf the book is on?
-
-// it is the state of the books array which is in Bookshelf.js
-// should I move that API call down to books and then pass it up to Bookshelf in a method? 
-// Yes. So the book's state will be determined in book. 
-// Then I can pass the value up to bookshelf to determine which shelf by
-// matching against whichShelf

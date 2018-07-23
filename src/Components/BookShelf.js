@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-// import ListControl from './ListControl'
 import Book from './Book'
 import * as BooksAPI from '../BooksAPI'
 
@@ -15,10 +14,10 @@ this.carrierFunctionTwo = this.carrierFunctionTwo.bind(this)
 	
 }
 
-
+	// this function exists to pass data up to the parent component.
     carrierFunctionTwo(newShelf, book) {
-	 // console.log('book first time = ', book)
-	 // console.log('newBookRow first time =', newShelf);
+	  // console.log('book first time = ', book)
+	  // console.log('newBookRow first time =', newShelf);
 	 if (this.props.onChangeShelf) {
 		this.props.onChangeShelf(newShelf, book);
 	}
@@ -51,7 +50,7 @@ let List = this.props.books.filter(book => book.shelf === this.props.whichShelf)
 
 		            {List.map((book) => (
 		            	<li key={book.id}>
-				     		<Book book={book} moveItUpTwo={this.carrierFunctionTwo}/>
+				     		<Book book={book} moveItUpTwo={this.carrierFunctionTwo} whichShelf={this.props.whichShelf}/>
 			     		</li>
 				            	)) }
 

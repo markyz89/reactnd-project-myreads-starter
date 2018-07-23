@@ -7,8 +7,8 @@ class ListControl extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
+	// this function handles the change in value in the select menu.
 	handleChange(e) {
-		// e.preventDefault();
 		let newBookRow = e.target.value;
 		let book = this.props.book;
 		
@@ -22,12 +22,12 @@ class ListControl extends React.Component {
 
 	render() {
 		return (
-			<select onChange={this.handleChange}>
-	            <option value="move">Move to...</option>
-	            <option value="currentlyReading">Currently Reading</option>
-	            <option value="wantToRead">Want to Read</option>
-	            <option value="read">Read</option>
-	            <option value="none">None</option>
+			<select onChange={this.handleChange} value={this.props.whichShelf}>	
+		            <option value="move" disabled>Move to...</option>
+		            <option value="currentlyReading">Currently Reading</option>
+		            <option value="wantToRead">Want to Read</option>
+		            <option value="read">Read</option>
+		            <option value="none">None</option>
         	</select>
 			)
 		}

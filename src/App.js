@@ -4,9 +4,8 @@ import BookShelf from './Components/BookShelf'
 import Search from  './Components/Search'
 import SearchButton from  './Components/SearchButton'
 import * as BooksAPI from './BooksAPI'
-
-
 import './App.css'
+
 
 
 class BooksApp extends React.Component {
@@ -15,34 +14,36 @@ class BooksApp extends React.Component {
     this.state = {
       books: [],
       shelf: '',
-      movedBook: ''
+      // movedBook: ''
     }
     this.changeShelf = this.changeShelf.bind(this);
 }
 
+// retrieve books currently on bookshelf
 componentDidMount() {
       BooksAPI.getAll().then((books) => {
         this.setState({ 
           books: books,
           shelf: '',
-          movedBook: ''
+          // movedBook: ''
                })
          // console.log ("what is it at this point?",books)
       })
 
     }
 
+// move books between shelves, and also from search to bookshelf.
 changeShelf(newShelf, book) {
-  console.log('book 2nd time= ', book)
-   console.log('newBookRow 2nd time =', newShelf);
-  let update = this.state.books
+  // console.log('book 2nd time= ', book)
+  //  console.log('newBookRow 2nd time =', newShelf);
+
   book.shelf = newShelf
 
-  let oldCollection = update.filter(b => b.id != book.id)
-  // console.log("old collection = ", oldCollection)
+  // let oldCollection = update.filter(b => b.id != book.id)
+  // // console.log("old collection = ", oldCollection)
 
-  let newCollection = oldCollection.concat([book])
-  // console.log("new collection = ", newCollection)
+  // let newCollection = oldCollection.concat([book])
+  // // console.log("new collection = ", newCollection)
   
 
   BooksAPI.update(book, newShelf).then((book) => {
@@ -53,7 +54,7 @@ changeShelf(newShelf, book) {
 
     this.setState({
       shelf: newShelf,
-      movedBook: book
+      // movedBook: book
     })
 
   
@@ -65,10 +66,10 @@ changeShelf(newShelf, book) {
     return (
       <div className="app"> 
         <Route path="/search" render={() => ( 
-          <Search/>
+          <Search onChangeShelf={this.changeShelf} shelvedBooks={this.state.books}/>
           )}
         />
-              <Route path="/" exact render={() => (
+              <Route exact path="/"  render={() => (
                 <div className="list-books">
                   <div className="list-books-title">
                     <h1>MyReads</h1>
@@ -88,11 +89,6 @@ changeShelf(newShelf, book) {
        </div>
             )
       }
-
-
-         
-    
-      
     }
 
   export default BooksApp

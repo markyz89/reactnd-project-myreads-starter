@@ -12,9 +12,15 @@ class Search extends React.Component {
       searchResults: [],
       query: ''
     }
+
+    this.carrierFunctionThree = this.carrierFunctionThree.bind(this)
+    // this.clearQuery = this.clearQuery.bind(this)
     
   }
 
+// this function creates a controlled component, with user input updating state
+// the user input is then passed into the API search query to render search results
+// if else statements handle errors.
     updateQuery = (query) => {
     this.setState({query});
     // console.log(query);
@@ -23,41 +29,44 @@ class Search extends React.Component {
       if(searchResults.error) {
         this.setState({
         searchResults: []
-      });
+      })
       } else {
         this.setState({
         searchResults
-      });
+      })
       }
       
     }) } else {
       this.setState({
         searchResults: []
-      });
+      })
+
     }
       // console.log('results =',results)
       // console.log('query =',this.state.query)
     }
   
 
+    // this function exists to pass data up to the parent component.
+      carrierFunctionThree(newShelf, book) {
+   // console.log('book first time = ', book)
+   // console.log('newBookRow first time =', newShelf);
+   if (this.props.onChangeShelf) {
+    this.props.onChangeShelf(newShelf, book);
+  }
+}
   
 
   render() { 
 
 
+
   return (
         <div className="search-books">
             <div className="search-books-bar">
-              <Link to="/" className="close-search">Close</Link>
+              <Link to="/" exact className="close-search">Close</Link>
               <div className="search-books-input-wrapper">
-                {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
+         
                 <input type="text" 
                        placeholder="Search by title or author"
                        value={this.state.query}
@@ -66,7 +75,7 @@ class Search extends React.Component {
               </div>
             </div>
                {this.state.searchResults != null && (
-                <SearchResults searchResults={this.state.searchResults}/> 
+                <SearchResults searchResults={this.state.searchResults} moveItUpThree={this.carrierFunctionThree} shelvedBooks={this.props.shelvedBooks}/> 
               
               
                 
