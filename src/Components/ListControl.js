@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-class ListControl extends React.Component {
+class ListControl extends Component {
 	constructor(props) {
 		super(props);
 

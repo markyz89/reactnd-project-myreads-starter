@@ -38,24 +38,26 @@ changeShelf(newShelf, book) {
   //  console.log('newBookRow 2nd time =', newShelf);
 
   book.shelf = newShelf
+  let updated = this.state.books
+  let oldCollection = updated.filter(b => b.id != book.id)
+  console.log("old collection = ", oldCollection)
 
-  // let oldCollection = update.filter(b => b.id != book.id)
-  // // console.log("old collection = ", oldCollection)
-
-  // let newCollection = oldCollection.concat([book])
-  // // console.log("new collection = ", newCollection)
+  let newCollection = oldCollection.concat([book])
+  console.log("new collection = ", newCollection)
   
 
   BooksAPI.update(book, newShelf).then((book) => {
+    this.setState(state => ({
+      books:newCollection})
+      // shelf: newShelf
+      // movedBook: book
+    )
       // this.setState(state => ({
       //   books: newCollection
       }
     )
 
-    this.setState({
-      shelf: newShelf,
-      // movedBook: book
-    })
+    
 
   
  }

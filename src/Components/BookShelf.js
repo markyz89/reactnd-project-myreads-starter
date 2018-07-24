@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Book from './Book'
 import * as BooksAPI from '../BooksAPI'
 
-class BookShelf extends React.Component {
+class BookShelf extends Component {
 	constructor(props) {
 		super(props);	
 		this.state = {
